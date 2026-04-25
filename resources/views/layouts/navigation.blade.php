@@ -1,100 +1,193 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
+{{-- resources/views/layouts/navigation.blade.php --}}
+
+<nav id="sidebar">
+
+    {{-- ── Logo ── --}}
+    <div class="sidebar-logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo">
+    </div>
+
+    {{-- ── Links ── --}}
+    <div class="sidebar-nav">
+
+        {{-- Dashboard --}}
+        <a href="{{ route('dashboard') }}" class="sidebar-item">
+            <i class="bi bi-speedometer2"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <div class="sidebar-divider"></div>
+
+        {{-- ══ GRUPO: ACCESO Y SEGURIDAD ══ --}}
+        <div class="sidebar-group" id="group-acceso">
+
+            <button class="sidebar-group-toggle" data-group="acceso">
+                <div class="sgt-left">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <span>Acceso y Seguridad</span>
                 </div>
+                <i class="bi bi-chevron-down sgt-chevron"></i>
+            </button>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+            <div class="sidebar-submenu" id="submenu-acceso">
+                <a href="{{ route('users.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-people"></i>
+                    <span>Usuarios</span>
+                </a>
+                <a href="{{ route('roles.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Roles</span>
+                </a>
+                <a href="{{ route('user-roles.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-key"></i>
+                    <span>Asignar Rol a Usuario</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        {{-- ══ GRUPO: PARAMETRIZACIÓN ══ --}}
+        <div class="sidebar-group" id="group-parametros">
+
+            <button class="sidebar-group-toggle" data-group="parametros">
+                <div class="sgt-left">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Parametrización</span>
                 </div>
+                <i class="bi bi-chevron-down sgt-chevron"></i>
+            </button>
+
+            <div class="sidebar-submenu" id="submenu-parametros">
+                <a href="{{ route('clientes.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-person-badge"></i>
+                    <span>Clientes</span>
+                </a>
+                <a href="{{ route('vehiculos.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Vehículos</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Mecánicos</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Epecialidades</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-person-workspace"></i>
+                    <span>Asignar Especialidad a Mecánico</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Servicios</span>
+                </a>
+                <a href="{{ route('repuestos.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-person-workspace"></i>
+                    <span>Repuestos</span>
+                </a>
+                <a href="{{ route('problemas.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Problemas</span>
+                </a>
             </div>
+        </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+        <div class="sidebar-divider"></div>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+        {{-- ══ GRUPO: TRANSACCIONALES ══ --}}
+        <div class="sidebar-group" id="group-transaccional">
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+            <button class="sidebar-group-toggle" data-group="transaccional">
+                <div class="sgt-left">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Transaccionales</span>
+                </div>
+                <i class="bi bi-chevron-down sgt-chevron"></i>
+            </button>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+            <div class="sidebar-submenu" id="submenu-transaccional">
+                <a href="{{ route('diagnosticos.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-tools"></i>
+                    <span>Diagnosticos</span>
+                </a>
+                <a href="{{ route('orden-trabajos.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <span>Órdenes de Trabajo</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-tools"></i>
+                    <span>Pagos</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-clipboard2-check"></i>
+                    <span>Notificaciones</span>
+                </a>
             </div>
+        </div>
 
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+        <div class="sidebar-divider"></div>
+
+        {{-- ══ GRUPO: REPORTES ══ --}}
+        <div class="sidebar-group" id="group-reportes">
+
+            <button class="sidebar-group-toggle" data-group="reportes">
+                <div class="sgt-left">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Reportes</span>
+                </div>
+                <i class="bi bi-chevron-down sgt-chevron"></i>
+            </button>
+
+            <div class="sidebar-submenu" id="submenu-reportes">
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-person-badge"></i>
+                    <span>Trabajos por Mecanico</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Diagnósticos Realizados</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-tools"></i>
+                    <span>Mantenimientos por Vehículo</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Servicios por Vehículo</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-box-seam"></i>
+                    <span>Stock de Repuestos</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="sidebar-divider"></div>
+
+        {{-- ══ GRUPO: ESTADISTICAS ══ --}}
+        <div class="sidebar-group" id="group-estadistica">
+
+            <button class="sidebar-group-toggle" data-group="estadistica">
+                <div class="sgt-left">
+                    <i class="bi bi-sliders2"></i>
+                    <span>Estadisticas</span>
+                </div>
+                <i class="bi bi-chevron-down sgt-chevron"></i>
+            </button>
+
+            <div class="sidebar-submenu" id="submenu-estadistica">
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-person-badge"></i>
+                    <span>Relaciones</span>
+                </a>
+                <a href="#" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-car-front"></i>
+                    <span>Automoviles</span>
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        </div>
-    </div>
 </nav>

@@ -1,0 +1,434 @@
+:root {
+    --naranja: #E8650A;
+    --naranja-light: #FF8533;
+    --sidebar-width: 250px;
+    --topbar-height: 62px;
+    --sidebar-bg: linear-gradient(to top, #440e03 0%, #E8650A 5%, #fde9d4 20%, #fff 40%, #fff 100%);
+    --sidebar-text: black;
+    --sidebar-hover: rgba(100, 100, 100, 0.60);
+    --sidebar-active: rgba(232, 101, 10, 0.2);
+    --sidebar-border: #E8650A;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* ─── SIDEBAR ─── */
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    z-index: 1040;
+    transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
+    overflow: hidden;
+}
+
+#sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* Logo area */
+.sidebar-logo {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--sidebar-border);
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 120px;
+    height: 105px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+/* Nav sections */
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+}
+
+.sidebar-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #555;
+    padding: 16px 20px 6px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.18s, color 0.18s;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.sidebar-item:hover {
+    background: var(--sidebar-hover);
+    color: #fff;
+    border-left-color: var(--naranja);
+}
+
+.sidebar-item.active {
+    background: var(--sidebar-active);
+    color: var(--naranja-light);
+    border-left-color: var(--naranja);
+}
+
+.sidebar-item i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: var(--sidebar-border);
+    margin: 8px 0;
+}
+
+.sidebar-group-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    border-left: 3px solid transparent;
+    color: black;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.18s, border-color 0.18s;
+}
+
+.sidebar-group-toggle:hover {
+    background: var(--sidebar-hover);
+    border-left-color: var(--naranja);
+}
+
+.sidebar-group-toggle.open {
+    color: var(--naranja-light);
+    background: rgba(232, 101, 10, 0.08);
+    border-left-color: var(--naranja);
+}
+
+.sgt-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sgt-left>i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: var(--naranja);
+}
+
+/* Flecha indicadora */
+.sgt-chevron {
+    font-size: 12px;
+    color: #555;
+    transition: transform 0.28s cubic-bezier(.4, 0, .2, 1), color 0.18s;
+    flex-shrink: 0;
+}
+
+.sidebar-group-toggle.open .sgt-chevron {
+    transform: rotate(180deg);
+    color: var(--naranja);
+}
+
+/* ─── SUBMENÚ COLAPSABLE ─── */
+.sidebar-submenu {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.32s cubic-bezier(.4, 0, .2, 1),
+        opacity 0.22s ease;
+}
+
+.sidebar-submenu.open {
+    max-height: 500px;
+    opacity: 1;
+}
+
+/* ─── SUBITEMS ─── */
+.sidebar-subitem {
+    padding-left: 50px !important;
+    font-size: 13.5px;
+    position: relative;
+}
+
+/* Bolita decorativa */
+.sidebar-subitem::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3a3a3a;
+    transition: background 0.18s;
+}
+
+.sidebar-subitem:hover::before,
+.sidebar-subitem.active::before {
+    background: var(--naranja);
+}
+
+.sidebar-subitem i {
+    font-size: 14px !important;
+}
+
+/* ─── TOPBAR ─── */
+#topbar {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: var(--topbar-height);
+    background: linear-gradient(to right, #C0C0C0 0%, #fff 15%, #fde9d4 70%, #E8650A 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1030;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: left 0.3s cubic-bezier(.4, 0, .2, 1);
+    gap: 12px;
+}
+
+#topbar.expanded {
+    left: 0;
+}
+
+/* Hamburger */
+#toggleSidebar {
+    background: none;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E8650A;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background 0.18s;
+    flex-shrink: 0;
+}
+
+#toggleSidebar:hover {
+    background: rgba(200, 150, 100, 0.50);
+}
+
+/* Workshop name in topbar (visible when sidebar hidden) */
+.topbar-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+}
+
+.topbar-brand.visible {
+    opacity: 1;
+}
+
+.topbar-brand .or {
+    color: black;
+}
+
+.topbar-brand .bk {
+    color: var(--naranja);
+}
+
+.topbar-spacer {
+    flex: 1;
+}
+
+/* User dropdown */
+.topbar-user .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: none;
+    border-radius: 30px;
+    padding: 6px 14px 6px 8px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #1a1a1a;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: background 0.18s, box-shadow 0.18s;
+}
+
+.topbar-user .btn:hover {
+    background: rgba(225, 225, 225, 0.75);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.topbar-user .avatar {
+    width: 30px;
+    height: 30px;
+    background: var(--naranja);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ─── MAIN CONTENT ─── */
+#mainContent {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--topbar-height);
+    min-height: calc(100vh - var(--topbar-height));
+    transition: margin-left 0.3s cubic-bezier(.4, 0, .2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+#mainContent.expanded {
+    margin-left: 0;
+}
+
+.content-area {
+    flex: 1;
+    padding: 28px 24px;
+}
+
+/* ─── SECTION TITLE ─── */
+.dash-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.dash-section-title .bar {
+    width: 4px;
+    height: 22px;
+    background: var(--naranja);
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.dash-section-title h6 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+}
+
+/* ─── FOOTER ─── */
+#mainFooter {
+    background: #111;
+    color: #aaa;
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+#mainFooter span {
+    color: var(--naranja);
+    font-weight: 600;
+}
+
+/* ─── OVERLAY (mobile) ─── */
+#sidebarOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1039;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 991.98px) {
+    #sidebar {
+        transform: translateX(-100%);
+    }
+
+    #sidebar.open {
+        transform: translateX(0);
+    }
+
+    #topbar {
+        left: 0 !important;
+    }
+
+    #mainContent {
+        margin-left: 0 !important;
+    }
+
+    #sidebarOverlay {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+
+    #sidebarOverlay.active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    #toggleSidebar {
+        color: var(--naranja);
+    }
+}

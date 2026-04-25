@@ -1,0 +1,370 @@
+/* =============================================================
+   EL GARAGE — Users CRUD
+   Cubre: toolbar, tabla, formulario centralizado,
+          avatares, botón naranja y utilidades.
+   ============================================================= */
+
+/* ─── COLOR UTILITARIO ─── */
+.text-naranja {
+    color: var(--naranja);
+}
+
+/* ─── BOTÓN NARANJA ─── */
+.btn-naranja {
+    background-color: var(--naranja);
+    border-color: var(--naranja);
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-naranja:hover,
+.btn-naranja:focus {
+    background-color: #cc5508;
+    border-color: #cc5508;
+    color: #fff;
+}
+
+/* =============================================================
+   INDEX — TOOLBAR (búsqueda + botón nuevo)
+   ============================================================= */
+.crud-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.crud-search {
+    flex: 1;
+    min-width: 260px;
+    max-width: 520px;
+}
+
+/* =============================================================
+   TABLA
+   ============================================================= */
+.crud-wrapper {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+}
+
+.table-crud {
+    margin: 0;
+}
+
+/* Cabecera naranja */
+
+.table-crud thead th {
+    background: var(--naranja);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 14px 12px;
+    border: none;
+    white-space: nowrap;
+}
+
+.table-crud tbody td:hover {
+    background: #fff8f4 !important;
+}
+
+.table-crud tbody td {
+    padding: 12px 12px;
+    vertical-align: middle;
+    border-color: #f0f0f0;
+    font-size: 14px;
+}
+
+/* Avatar pequeño en la tabla */
+.user-avatar-sm {
+    width: 32px;
+    height: 32px;
+    background: var(--naranja);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* =============================================================
+   FORMULARIO — tarjeta centrada al 60%
+   ============================================================= */
+.crud-form-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    padding: 36px 40px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* Input groups: icono alineado */
+.crud-form-card .input-group-text {
+    background: #f9f9f9;
+    border-right: none;
+    color: var(--naranja);
+}
+
+.crud-form-card .form-control,
+.crud-form-card .form-select {
+    border-left: none;
+}
+
+.crud-form-card .form-control:focus,
+.crud-form-card .form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(232, 101, 10, 0.2);
+    border-color: var(--naranja);
+}
+
+/* Reacomodar borde cuando hay error */
+.crud-form-card .form-control.is-invalid,
+.crud-form-card .form-select.is-invalid {
+    border-left: none;
+}
+
+/* Avatar grande en show */
+.user-avatar-lg {
+    width: 72px;
+    height: 72px;
+    background: var(--naranja);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.vehiculo-avatar {
+    width: 72px;
+    height: 72px;
+    background: #fff5ed;
+    border: 2px solid var(--naranja);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--naranja);
+    font-size: 30px;
+}
+ 
+.vehiculo-avatar-sm {
+    width: 48px;
+    height: 48px;
+    background: #fff5ed;
+    border: 2px solid var(--naranja);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--naranja);
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.badge-placa {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+.color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.vehiculo-mini-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #fafafa;
+    border: 1px solid #eeee;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.assign-vehiculo-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff8f4;
+    border: 1px solid rgba(232, 101, 10, 0.2);
+    border-radius: 10px;
+    padding: 16px 20px;
+}
+
+.badge-estado {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-estado--pendiente      { background: #fef3c7; color: #92400e; }
+.badge-estado--en-proceso     { background: #dbeafe; color: #1e40af; }
+.badge-estado--completado     { background: #d1fae5; color: #065f46; }
+
+.badge-gravedad {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-gravedad--leve     { background: #d1fae5; color: #065f46; }
+.badge-gravedad--moderado { background: #fef3c7; color: #92400e; }
+.badge-gravedad--grave    { background: #fee2e2; color: #991b1b; }
+
+.badge-prioridad {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-prioridad--baja  { background: #d1fae5; color: #065f46; }
+.badge-prioridad--media { background: #fef3c7; color: #92400e; }
+.badge-prioridad--alta  { background: #fee2e2; color: #991b1b; }
+
+.detalle-card {
+    padding: 12px 16px;
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    border-left: 3px solid var(--naranja);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 991.98px) {
+    .crud-form-card {
+        width: 100%;
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .crud-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .crud-search {
+        max-width: 100%;
+    }
+}
+
+/* =============================================================
+   BADGE DE ROL (tabla e índice)
+   ============================================================= */
+.badge-rol {
+    display: inline-block;
+    background: #fff5ed;
+    color: var(--naranja);
+    border: 1px solid rgba(232, 101, 10, 0.3);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px 2px 2px 0;
+}
+ 
+/* =============================================================
+   CHECKBOXES DE ROLES EN TARJETA
+   ============================================================= */
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+}
+ 
+/* Tarjeta clickeable que envuelve el checkbox */
+.role-checkbox-card {
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+ 
+/* Ocultar el checkbox nativo */
+.role-checkbox-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+ 
+/* Cuerpo visual de la tarjeta */
+.role-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 12px;
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    text-align: center;
+}
+ 
+.role-card-body:hover {
+    border-color: var(--naranja);
+    background: #fff8f4;
+}
+ 
+.role-card-icon {
+    font-size: 22px;
+    color: #bbb;
+    transition: color 0.18s;
+}
+ 
+.role-card-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    transition: color 0.18s;
+}
+ 
+/* Estado seleccionado */
+.role-checkbox-card.selected .role-card-body,
+.role-checkbox-card input:checked ~ .role-card-body {
+    border-color: var(--naranja);
+    background: #fff5ed;
+    box-shadow: 0 0 0 3px rgba(232, 101, 10, 0.12);
+}
+ 
+.role-checkbox-card.selected .role-card-icon,
+.role-checkbox-card input:checked ~ .role-card-body .role-card-icon {
+    color: var(--naranja);
+}
+ 
+.role-checkbox-card.selected .role-card-name,
+.role-checkbox-card input:checked ~ .role-card-body .role-card-name {
+    color: var(--naranja);
+}
