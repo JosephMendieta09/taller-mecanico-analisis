@@ -17,7 +17,7 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\VehiculoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
@@ -38,6 +38,8 @@ Route::middleware(['auth', 'role:administrador'])->group(function () {
     Route::resource('role-permissions', RolePermissionController::class)->except(['show'])->parameters(['role-permissions' => 'role']);
     Route::resource('clientes', ClienteController::class)->except(['show']);
     Route::resource('vehiculos', VehiculoController::class)->except(['show']);
+    Route::get('vehiculos/{vehiculo}/assign-cliente', [VehiculoController::class, 'assignClienteForm'])->name('vehiculos.assign-cliente');
+    Route::post('vehiculos/{vehiculo}/assign-cliente', [VehiculoController::class, 'assignCliente'])->name('vehiculos.assign-cliente.store');
     Route::resource('diagnosticos', DiagnosticoController::class)->except(['show']);
     Route::resource('problemas', ProblemaController::class)->except(['show']);
     Route::resource('detalle-diagnosticos', DetalleDiagnosticoController::class)->except(['show']);

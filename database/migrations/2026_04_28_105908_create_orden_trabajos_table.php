@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('orden_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('diagnostico_id')->constrained('diagnosticos')->onDelete('cascade');
-            $table->date('fecha_inicio');
-            $table->date('fecha_final');
-            $table->string('notas');
-            $table->double('costo');
-            $table->string('estado');
+            $table->foreignId('diagnostico_id')->nullable()->constrained('diagnosticos')->nullOnDelete();
+            $table->timestamp('fecha_inicio')->useCurrent();
+            $table->timestamp('fecha_final')->nullable();
+            $table->string('notas')->nullable();
+            $table->decimal('costo', 10, 2)->nullable();
+            $table->enum('estado', ['pendiente', 'en_proceso', 'finalizado'])->default('pendiente');
             $table->timestamps();
         });
     }
@@ -29,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::dropIfExists('orden_trabajos');
     }
 };

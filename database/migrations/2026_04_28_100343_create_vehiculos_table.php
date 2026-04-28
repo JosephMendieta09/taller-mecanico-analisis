@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('vehiculos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('cedula')->unique();
-            $table->string('email')->unique();
-            $table->string('telefono');
-            $table->string('direccion');
+            $table->foreignId('cliente_id')->nullable()->constrained('clientes')->nullOnDelete();
+            $table->string('placa')->unique();
+            $table->string('marca');
+            $table->string('modelo');
+            $table->string('color');
+            $table->integer('kilometraje');
             $table->timestamps();
         });
     }
@@ -28,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('vehiculos');
     }
 };

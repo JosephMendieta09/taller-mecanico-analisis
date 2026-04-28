@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        Schema::create('vehiculos', function (Blueprint $table) {
+        Schema::create('problemas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
-            $table->string('placa')->unique();
-            $table->string('marca');
-            $table->string('modelo');
-            $table->string('color');
-            $table->integer('kilometraje');
+            $table->string('descripcion');
+            $table->string('categoria');
+            $table->enum('gravedad', ['baja', 'media', 'alta'])->default('baja');
             $table->timestamps();
         });
     }
@@ -29,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        Schema::dropIfExists('vehiculos');
+        Schema::dropIfExists('problemas');
     }
 };

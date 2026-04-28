@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('detalle_repuestos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('orden_trabajo_id')->constrained('orden_trabajos')->onDelete('cascade');
-            $table->foreignId('repuesto_id')->constrained('repuestos')->onDelete('cascade');
-            $table->date('fecha');
+            $table->foreignId('repuesto_id')->nullable()->constrained('repuestos')->nullOnDelete();
+            $table->timestamp('fecha')->useCurrent();
             $table->integer('cantidad');
-            $table->double('monto');
+            $table->decimal('monto', 10, 2);
             $table->timestamps();
         });
     }
@@ -28,7 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::dropIfExists('detalle_repuestos');
     }
 };

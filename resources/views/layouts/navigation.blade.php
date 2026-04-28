@@ -12,7 +12,7 @@
 
         {{-- Dashboard --}}
         <a href="{{ route('dashboard') }}" class="sidebar-item">
-            <i class="bi bi-speedometer2"></i>
+            <i class="bi bi-house-fill"></i>
             <span>Dashboard</span>
         </a>
 
@@ -42,6 +42,14 @@
                     <i class="bi bi-key"></i>
                     <span>Asignar Rol a Usuario</span>
                 </a>
+                <a href="{{ route('permissions.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-passport"></i>
+                    <span>Permisos</span>
+                </a>
+                <a href="{{ route('role-permissions.index') }}" class="sidebar-item sidebar-subitem">
+                    <i class="bi bi-file-lock"></i>
+                    <span>Asignar Permiso a Rol</span>
+                </a>
             </div>
         </div>
 
@@ -52,7 +60,7 @@
 
             <button class="sidebar-group-toggle" data-group="parametros">
                 <div class="sgt-left">
-                    <i class="bi bi-sliders2"></i>
+                    <i class="bi bi-file-earmark-text-fill"></i>
                     <span>Parametrización</span>
                 </div>
                 <i class="bi bi-chevron-down sgt-chevron"></i>
@@ -68,11 +76,11 @@
                     <span>Vehículos</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-car-front"></i>
+                    <i class="bi bi-robot"></i>
                     <span>Mecánicos</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-car-front"></i>
+                    <i class="bi bi-wrench-adjustable-circle"></i>
                     <span>Epecialidades</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
@@ -80,15 +88,15 @@
                     <span>Asignar Especialidad a Mecánico</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-car-front"></i>
+                    <i class="bi bi-ui-checks"></i>
                     <span>Servicios</span>
                 </a>
                 <a href="{{ route('repuestos.index') }}" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-person-workspace"></i>
+                    <i class="bi bi-tools"></i>
                     <span>Repuestos</span>
                 </a>
                 <a href="{{ route('problemas.index') }}" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-box-seam"></i>
+                    <i class="bi bi-steam"></i>
                     <span>Problemas</span>
                 </a>
             </div>
@@ -101,7 +109,7 @@
 
             <button class="sidebar-group-toggle" data-group="transaccional">
                 <div class="sgt-left">
-                    <i class="bi bi-sliders2"></i>
+                    <i class="bi bi-calculator-fill"></i>
                     <span>Transaccionales</span>
                 </div>
                 <i class="bi bi-chevron-down sgt-chevron"></i>
@@ -109,7 +117,7 @@
 
             <div class="sidebar-submenu" id="submenu-transaccional">
                 <a href="{{ route('diagnosticos.index') }}" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-tools"></i>
+                    <i class="bi bi-puzzle"></i>
                     <span>Diagnosticos</span>
                 </a>
                 <a href="{{ route('orden-trabajos.index') }}" class="sidebar-item sidebar-subitem">
@@ -117,11 +125,11 @@
                     <span>Órdenes de Trabajo</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-tools"></i>
+                    <i class="bi bi-cash-coin"></i>
                     <span>Pagos</span>
                 </a>
                 <a href="#" class="sidebar-item sidebar-subitem">
-                    <i class="bi bi-clipboard2-check"></i>
+                    <i class="bi bi-envelope-paper"></i>
                     <span>Notificaciones</span>
                 </a>
             </div>
@@ -134,7 +142,7 @@
 
             <button class="sidebar-group-toggle" data-group="reportes">
                 <div class="sgt-left">
-                    <i class="bi bi-sliders2"></i>
+                    <i class="bi bi-collection-fill"></i>
                     <span>Reportes</span>
                 </div>
                 <i class="bi bi-chevron-down sgt-chevron"></i>
@@ -171,7 +179,7 @@
 
             <button class="sidebar-group-toggle" data-group="estadistica">
                 <div class="sgt-left">
-                    <i class="bi bi-sliders2"></i>
+                    <i class="bi bi-bar-chart-line-fill"></i>
                     <span>Estadisticas</span>
                 </div>
                 <i class="bi bi-chevron-down sgt-chevron"></i>

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
         Schema::create('diagnosticos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vehiculo_id')->constrained('vehiculos')->onDelete('cascade');
-            $table->string('descripcion');
-            $table->string('estado');
+            $table->string('descripcion')->nullable();
+            $table->enum('estado', ['pendiente', 'en_proceso', 'finalizado'])->default('pendiente');
             $table->timestamps();
         });
     }
@@ -26,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
         Schema::dropIfExists('diagnosticos');
     }
 };

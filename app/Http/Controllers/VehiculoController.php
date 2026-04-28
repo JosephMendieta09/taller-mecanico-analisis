@@ -98,7 +98,7 @@ class VehiculoController extends Controller
     {
         $clientes = Cliente::orderBy('nombre')->get();
  
-        return view('vehiculos.assign-cliente', compact('vehiculo', 'clientes'));
+        return view('vehiculo.assign-cliente', compact('vehiculo', 'clientes'));
     }
  
     public function assignCliente(VehiculoRequest $request, Vehiculo $vehiculo)
