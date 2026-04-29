@@ -75,7 +75,7 @@
                     <i class="bi bi-car-front"></i>
                     <span>Vehículos</span>
                 </a>
-                <a href="#" class="sidebar-item sidebar-subitem">
+                <a href="{{ route('mecanicos.index') }}" class="sidebar-item sidebar-subitem">
                     <i class="bi bi-robot"></i>
                     <span>Mecánicos</span>
                 </a>
