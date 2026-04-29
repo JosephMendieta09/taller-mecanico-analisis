@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DetalleDiagnosticoController;
 use App\Http\Controllers\DetalleRepuestoController;
 use App\Http\Controllers\DiagnosticoController;
+use App\Http\Controllers\MecanicoController;
 use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProblemaController;
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'role:administrador'])->group(function () {
     Route::resource('orden-trabajos', OrdenTrabajoController::class)->except(['show']);
     Route::resource('repuestos', RepuestoController::class)->except(['show']);
     Route::resource('detalle-repuestos', DetalleRepuestoController::class)->except(['show']);
+    Route::resource('mecanicos', MecanicoController::class)->except(['show']);
 });
 
 require __DIR__ . '/auth.php';

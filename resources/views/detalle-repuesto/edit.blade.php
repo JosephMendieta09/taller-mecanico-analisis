@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Editar Detalle de Repuesto')
 @push('styles') @vite('resources/css/cruds.css') @endpush
-
+ 
 @section('content')
     <div class="dash-section-title mb-4">
         <div class="bar"></div>
@@ -22,19 +22,19 @@
         </form>
     </div>
 @endsection
-
+ 
 @push('scripts')
 <script>
     const repuestoSelect = document.getElementById('repuesto_id');
     const cantidadInput  = document.getElementById('cantidad');
     const montoPreview   = document.getElementById('monto_preview');
-
+ 
     function calcularMonto() {
         const precio   = parseFloat(repuestoSelect.selectedOptions[0]?.dataset.precio || 0);
         const cantidad = parseInt(cantidadInput.value || 0);
         montoPreview.value = (precio * cantidad).toFixed(2);
     }
-
+ 
     repuestoSelect.addEventListener('change', calcularMonto);
     cantidadInput.addEventListener('input', calcularMonto);
 </script>
