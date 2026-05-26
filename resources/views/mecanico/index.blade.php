@@ -49,7 +49,7 @@
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Cédula</th>
-                    <th>Correo</th>
+                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>Estado</th>
                     <th class="text-center">Acciones</th>
@@ -85,13 +85,13 @@
                             <div class="d-flex justify-content-center gap-2">
                                 <a href="{{ route('mecanicos.edit', $mecanico) }}"
                                    class="btn btn-sm btn-success d-flex align-items-center gap-1">
-                                    <i class="bi bi-pencil"></i>
+                                    <i class="bi bi-pencil"></i>Editar
                                 </a>
                                 <form method="POST" action="{{ route('mecanicos.destroy', $mecanico) }}"
                                       onsubmit="return confirm('¿Eliminar al mecánico {{ addslashes($mecanico->nombre) }}?')">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger d-flex align-items-center gap-1">
-                                        <i class="bi bi-trash"></i>
+                                        <i class="bi bi-trash"></i>Eliminar
                                     </button>
                                 </form>
                             </div>
