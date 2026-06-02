@@ -54,6 +54,10 @@ Route::apiResource('pago_ventas', PagoVentaApiController::class);
 Route::apiResource('ventas', VentaApiController::class);
 Route::apiResource('venta_repuestos', VentaRepuestoApiController::class);
 
-/*Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->get('/perfil', function(Request $request){
+    return $request->user();
+});
+
+Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('clientes', ClienteApiController::class);
-});*/
+});
