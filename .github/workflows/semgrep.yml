@@ -1,9 +1,6 @@
 name: Semgrep Security Scan
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -12,18 +9,33 @@ permissions:
 
 jobs:
   semgrep:
-    name: Analisis de seguridad con Semgrep
+    name: Analisis de seguridad Laravel
     runs-on: ubuntu-latest
 
     steps:
       - name: Descargar codigo del repositorio
         uses: actions/checkout@v4
 
+      - name: Verificar archivos del proyecto
+        run: |
+          echo "Directorio actual:"
+          pwd
+
+          echo ""
+          echo "Archivos principales:"
+          find . -maxdepth 2 -type f | sort | head -200
+
+          echo ""
+          echo "Archivos PHP encontrados:"
+          find . -type f -name "*.php" \
+            -not -path "./vendor/*" \
+            -not -path "./storage/*" | sort
+
       - name: Instalar Semgrep
         run: |
           python3 -m pip install semgrep
 
-      - name: Ejecutar analisis Semgrep
+      - name: Ejecutar Semgrep
         run: |
           semgrep \
             --config=auto \
