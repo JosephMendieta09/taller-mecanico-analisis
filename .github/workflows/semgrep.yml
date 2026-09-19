@@ -1,4 +1,4 @@
-name: Semgrep Security Scan
+name: Semgrep PHP Laravel Security Scan
 
 on:
   workflow_dispatch:
@@ -9,44 +9,67 @@ permissions:
 
 jobs:
   semgrep:
-    name: Analisis de seguridad Laravel
+    name: Analisis de seguridad PHP Laravel
     runs-on: ubuntu-latest
 
     steps:
       - name: Descargar codigo del repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Verificar archivos del proyecto
+      - name: Mostrar archivos PHP que seran analizados
         run: |
-          echo "Directorio actual:"
-          pwd
+          echo "Repositorio analizado:"
+          echo "$GITHUB_REPOSITORY"
 
           echo ""
-          echo "Archivos principales:"
-          find . -maxdepth 2 -type f | sort | head -200
+          echo "Commit analizado:"
+          echo "$GITHUB_SHA"
+
+          echo ""
+          echo "Rama:"
+          echo "$GITHUB_REF_NAME"
 
           echo ""
           echo "Archivos PHP encontrados:"
-          find . -type f -name "*.php" \
-            -not -path "./vendor/*" \
-            -not -path "./storage/*" | sort
+          find app bootstrap config database public routes tests \
+            -type f -name "*.php" \
+            -not -path "*/vendor/*" \
+            -not -path "*/storage/*" \
+            | sort
 
       - name: Instalar Semgrep
         run: |
+          python3 -m pip install --upgrade pip
           python3 -m pip install semgrep
 
-      - name: Ejecutar Semgrep
+      - name: Ejecutar analisis de seguridad PHP Laravel
         run: |
-          semgrep \
+          semgrep scan \
             --config=auto \
-            --exclude=vendor \
-            --exclude=storage \
+            --include="*.php" \
+            --exclude=".github" \
+            --exclude="vendor" \
+            --exclude="storage" \
+            --exclude="resources/views" \
             --sarif \
             --output=semgrep-results.sarif \
-            .
+            app \
+            bootstrap \
+            config \
+            database \
+            public \
+            routes \
+            tests
 
       - name: Subir resultados a GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: semgrep-results.sarif
-          category: semgrep
+          category: semgrep-php-laravel
+
+      - name: Guardar informe SARIF
+        uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-php-laravel-report
+          path: semgrep-results.sarif
+          retention-days: 30
