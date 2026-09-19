@@ -16,25 +16,15 @@ jobs:
       - name: Descargar codigo del repositorio
         uses: actions/checkout@v6
 
-      - name: Mostrar archivos PHP que seran analizados
+      - name: Verificar codigo PHP
         run: |
-          echo "Repositorio analizado:"
-          echo "$GITHUB_REPOSITORY"
-
-          echo ""
           echo "Commit analizado:"
           echo "$GITHUB_SHA"
 
           echo ""
-          echo "Rama:"
-          echo "$GITHUB_REF_NAME"
-
-          echo ""
-          echo "Archivos PHP encontrados:"
+          echo "Archivos PHP:"
           find app bootstrap config database public routes tests \
             -type f -name "*.php" \
-            -not -path "*/vendor/*" \
-            -not -path "*/storage/*" \
             | sort
 
       - name: Instalar Semgrep
@@ -45,11 +35,11 @@ jobs:
       - name: Ejecutar analisis de seguridad PHP Laravel
         run: |
           semgrep scan \
-            --config=auto \
+            --config=p/security-audit \
             --include="*.php" \
-            --exclude=".github" \
             --exclude="vendor" \
             --exclude="storage" \
+            --exclude=".github" \
             --exclude="resources/views" \
             --sarif \
             --output=semgrep-results.sarif \
